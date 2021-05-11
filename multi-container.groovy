@@ -37,9 +37,6 @@ spec:
   volumes:
   - name: home-volume
     emptyDir: {}
-  - name: m2
-    persistentVolumeClaim:
-      claimName: m2-claim
 """
     }
   }
