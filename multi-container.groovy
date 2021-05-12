@@ -1,5 +1,5 @@
 /**
- * 本範例展示使用多個 container, 至跑在同一個或不同的 stage 中, 並且讓這些 container 之間可以享有一個 shared volume
+ * 本範例展示使用多個 container, 並且讓這些 container 之間可以享有一個 shared volume
  */
 pipeline {
   agent {
@@ -52,9 +52,6 @@ spec:
           sh """
           echo '{"hello": "world"}' > ${DATA}/test.json
           """
-       }
-       container('jq') {
-         sh "ls -l ${DATA}/test.json"
        }
       }
     }

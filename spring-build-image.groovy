@@ -79,11 +79,6 @@ spec:
         mvn -f ${DATA}/pom.xml spring-boot:build-image -Dspring-boot.build-image.imageName=${IMAGE_NAME}
         """
        }
-      }
-    }
-
-    stage ('Clean image') {
-     steps {
        container('docker') {
         sh "docker rmi -f ${IMAGE_NAME}"
        }
