@@ -1,3 +1,6 @@
+/**
+ * 本範例展示如何在 stage 中, 操作 agent 中的 docker
+ */
 pipeline {
   agent {
     kubernetes {

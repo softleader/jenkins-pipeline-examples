@@ -1,3 +1,6 @@
+/**
+ * 本範例展示了如何 cache maven m2, 讓每次的 maven build 不用重新下載之前載過的 dependencies
+ */
 pipeline {
   agent {
     kubernetes {
