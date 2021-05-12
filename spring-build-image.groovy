@@ -85,7 +85,7 @@ spec:
     stage ('Clean image') {
      steps {
        container('docker') {
-        sh "docker rmi ${IMAGE_NAME}"
+        sh "docker rmi -f ${IMAGE_NAME}"
        }
       }
     }
