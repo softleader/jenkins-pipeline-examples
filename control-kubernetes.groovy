@@ -1,6 +1,5 @@
 /**
- * 本範例展示如何在 stage 中, 跟 kubernetes 互動, serviceAccountName 必須先在 k8s cluster 中設定好!
- * @see https://github.com/softleader/slke/blob/main/manifests/namespaces/jenkins.yaml#L39
+ * 本範例展示如何在 stage 中, 跟 kubernetes 互動
  */
 pipeline {
   agent {
@@ -10,6 +9,8 @@ pipeline {
       yaml """
 kind: Pod
 spec:
+  # service account 需要先在 k8s cluster 中建立好
+  # ref: https://github.com/softleader/slke/blob/main/manifests/namespaces/jenkins.yaml#L39
   serviceAccountName: jenkins
   containers:
   - name: kubectl
