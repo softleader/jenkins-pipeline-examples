@@ -29,19 +29,19 @@ spec:
   }
 
   stages {
-    stage ('Run an nginx Deployment.') {
+    stage ('Run an nginx Deployment') {
       steps {
         sh "kubectl create deployment --image=nginx nginx-app -n ${NAMESPACE}"
       }
     }
     
-    stage ('Get nginx Pod.') {
+    stage ('Get nginx Pod') {
       steps {
         sh "kubectl get po -l app=nginx-app -n ${NAMESPACE}"
       }
     }
 
-    stage ('Remove nginx Deployment.') {
+    stage ('Remove nginx Deployment') {
       steps {
         sh "kubectl delete deployment nginx-app -n ${NAMESPACE}"
       }
