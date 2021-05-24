@@ -24,22 +24,26 @@ spec:
     }
   }
 
+  environment {
+    NAMESPACE="default"
+  }
+
   stages {
-    stage ('Run an nginx Deployment in namespace: softleader-system') {
+    stage ('Run an nginx Deployment.') {
       steps {
-        sh "kubectl create deployment --image=nginx nginx-app -n softleader-system"
+        sh "kubectl create deployment --image=nginx nginx-app -n ${NAMESPACE}"
       }
     }
     
-    stage ('Get nginx pod in namespace: softleader-system') {
+    stage ('Get nginx Pod.') {
       steps {
-        sh "kubectl get po -l app=nginx-app -n softleader-system"
+        sh "kubectl get po -l app=nginx-app -n ${NAMESPACE}"
       }
     }
 
-    stage ('Remove nginx Deployment in namespace: softleader-system') {
+    stage ('Remove nginx Deployment.') {
       steps {
-        sh "kubectl delete deployment nginx-app -n softleader-system"
+        sh "kubectl delete deployment nginx-app -n ${NAMESPACE}"
       }
     }
   }
