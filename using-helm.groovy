@@ -30,7 +30,7 @@ spec:
   }
 
   stages {
-    stage ('Initialize bitnami repository') {
+    stage ('Initialize repository') {
       steps {
         sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
       }
