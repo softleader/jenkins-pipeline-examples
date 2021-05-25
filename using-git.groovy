@@ -21,16 +21,24 @@ spec:
 """
     }
   }
+  
+  environment {
+    // 在 Jenkins 中 System Configuration > Manage Credential
+    // ref: https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets
+    CREDENTIAL = credentials("a84db61d-b4a4-4e05-a368-c1b283860090")
+  }
 
   stages {
-     stage ('Configure committer identity') {
+     stage ('Configure git') {
       steps {
         sh """
+        git remote set-url origin https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/softleader/jenkins-pipeline-examples.git
         git config --global user.email "jenkins-bot@softleader.com.tw"
         git config --global user.name "jenkins-bot"
         """
       }
     }
+    
     stage('Create branch') {
       steps {
         sh "git checkout -b $BUILD_TAG"
