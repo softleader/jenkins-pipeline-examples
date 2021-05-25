@@ -29,16 +29,15 @@ spec:
   }
 
   stages {
-    // stage('Git clone repo') {
-    //   steps {
-    //     sh """
-    //     git clone -b main --depth 1 https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/softleader/jenkins-pipeline-examples.git .
-    //     git checkout -b $BUILD_TAG
-    //     git config --global user.email "jenkins-bot@softleader.com.tw"
-    //     git config --global user.name "jenkins-bot"
-    //     """
-    //   }
-    // } 
+    stage('Create branch') {
+      steps {
+        sh """
+        pwd
+        ls -l
+        git checkout -b $BUILD_TAG
+        """
+      }
+    } 
 
     stage('Modify file') {
       steps {
