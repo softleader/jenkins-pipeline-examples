@@ -32,16 +32,16 @@ spec:
   stages {
     stage ('Initialize repository') {
       steps {
-        sh "helm repo add bitnami https://charts.bitnami.com/bitnami"
+        sh """
+        helm repo add bitnami https://charts.bitnami.com/bitnami
+        helm repo update
+        """
       }
     }
 
     stage ('Installing package') {
       steps {
-        sh """
-        helm repo update
-        helm install nginx-app bitnami/nginx -n ${NAMESPACE}
-        """
+        sh "helm install nginx-app bitnami/nginx -n ${NAMESPACE}"
       }
     }
     
