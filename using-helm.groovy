@@ -30,9 +30,18 @@ spec:
   }
 
   stages {
-    stage ('Installing a Package') {
+    stage ('Initialize bitnami repository') {
       steps {
-        sh "helm install bitnami/nginx nginx-app -n ${NAMESPACE}"
+        sh "helm repo add bitnami https://charts.bitnami.com/bitnamih"
+      }
+    }
+
+    stage ('Installing package') {
+      steps {
+        sh """
+        helm repo update"
+        helm install bitnami/nginx nginx-app -n ${NAMESPACE}
+        """
       }
     }
     
@@ -42,7 +51,7 @@ spec:
       }
     }
 
-    stage ('Uninstall a Release') {
+    stage ('Uninstall release') {
       steps {
         sh "helm uninstall nginx-app -n ${NAMESPACE}"
       }
