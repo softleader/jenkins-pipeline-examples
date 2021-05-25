@@ -32,8 +32,7 @@ spec:
      stage ('Configure git') {
       steps {
         sh """
-        git config --global github.user $CREDENTIAL_USR
-        git config --global github.token "$CREDENTIAL_PSW"
+        git remote set-url origin https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/softleader/jenkins-pipeline-examples.git
         git config --global user.email "jenkins-bot@softleader.com.tw"
         git config --global user.name "jenkins-bot"
         """
