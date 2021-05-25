@@ -19,7 +19,7 @@ spec:
     tty: true
     resources:
       limits:
-        memory: "100Mi"
+        memory: "200Mi"
         cpu: "100m"
 """
     }
@@ -39,15 +39,15 @@ spec:
     stage ('Installing package') {
       steps {
         sh """
-        helm repo update"
-        helm install bitnami/nginx nginx-app -n ${NAMESPACE}
+        helm repo update
+        helm install nginx-app bitnami/nginx -n ${NAMESPACE}
         """
       }
     }
     
     stage ('List released') {
       steps {
-        sh "helm ls"
+        sh "helm ls -n ${NAMESPACE}"
       }
     }
 
