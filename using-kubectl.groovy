@@ -1,5 +1,5 @@
 /**
- * 本範例展示如何在 stage 中, 跟 kubernetes 互動
+ * 本範例展示如何在 stage 中, 透過 kubectl 跟 kubernetes 互動
  */
 pipeline {
   agent {
@@ -14,7 +14,7 @@ spec:
   serviceAccountName: jenkins
   containers:
   - name: kubectl
-    image: lachlanevenson/k8s-kubectl 
+    image: lachlanevenson/k8s-kubectl
     command: ['cat']
     tty: true
     resources:

@@ -11,7 +11,7 @@ kind: Pod
 spec:
   containers:
   - name: maven
-    image: harbor.softleader.com.tw/library/maven-git:3.6.2-jdk-11-slim
+    image: csanchez/maven:azulzulu-11-alpine
     command: ['cat']
     tty: true
     resources:
