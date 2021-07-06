@@ -56,7 +56,7 @@ spec:
 
   environment {
     DATA="/data"
-    IMAGE_NAME="jenkins-pipeline-spring-build-image-demo:1.0.0"
+    IMAGE_NAME="jenkins-pipeline-examples/spring-build-image:1.0.0"
   }
 
   stages {
