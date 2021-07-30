@@ -31,14 +31,14 @@ spec:
   }
   
   environment {
-    SCAN_IMAGE = "adoptopenjdk/openjdk11:alpine-jre"
+    IMAGE = "adoptopenjdk/openjdk11:alpine-jre"
   }
 
   stages {
      stage ('Image Scan') {
       steps {
         sh """
-        trivy image --severity MEDIUM,HIGH,CRITICAL --exit-code 1 ${SCAN_IMAGE}
+        trivy image --severity MEDIUM,HIGH,CRITICAL --exit-code 1 ${IMAGE}
         """
       }
     }
