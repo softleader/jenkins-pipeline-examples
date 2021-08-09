@@ -20,7 +20,7 @@ spec:
     - name: shared-data
       mountPath: /data
   - name: maven
-    image: csanchez/maven:azulzulu-11
+    image: ghcr.io/carlossg/maven:3.6-azulzulu-11
     command: ['cat']
     tty: true
     volumeMounts:
