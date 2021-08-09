@@ -12,7 +12,7 @@ kind: Pod
 spec:
   containers:
   - name: maven
-    image: csanchez/maven:azulzulu-11
+    image: ghcr.io/carlossg/maven:3.6-azulzulu-11
     command: ['cat']
     tty: true
     resources:
