@@ -11,7 +11,7 @@ kind: Pod
 spec:
   containers:
   - name: git
-    image: alpine/git
+    image: alpine/git:v2.32.0
     command: ['cat']
     tty: true
     resources:
