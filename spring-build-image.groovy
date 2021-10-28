@@ -20,7 +20,7 @@ spec:
     - name: shared-data
       mountPath: /data
   - name: maven
-    image: ghcr.io/carlossg/maven:3.6-azulzulu-11
+    image: ghcr.io/carlossg/maven:3-eclipse-temurin-11
     command: ['cat']
     tty: true
     volumeMounts:
