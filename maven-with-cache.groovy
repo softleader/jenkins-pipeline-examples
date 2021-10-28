@@ -12,7 +12,7 @@ kind: Pod
 spec:
   containers:
   - name: maven
-    image: ghcr.io/carlossg/maven:3-eclipse-temurin-11
+    image: harbor.softleader.com.tw/library/maven:3-eclipse-temurin-11
     command: ['cat']
     tty: true
     resources:
