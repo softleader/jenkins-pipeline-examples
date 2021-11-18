@@ -20,6 +20,7 @@
     <module>transglobe-core</module>
     <module>transglobe-web</module>
     <module>transglobe-data-jpa</module>
+    <module>transglobe-test</module>
 
     <!-- Examples -->
     <module>examples</module>

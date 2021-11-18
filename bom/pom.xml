@@ -40,6 +40,17 @@
         <artifactId>transglobe-data-jpa</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.transglobe.framework</groupId>
+        <artifactId>transglobe-libraries</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.transglobe.framework</groupId>
+        <artifactId>transglobe-test</artifactId>
+        <version>${project.version}</version>
+        <scope>test</scope>
+      </dependency>
 
       <!-- Spring-Boot dependencies, imported as a BOM -->
       <dependency>
