@@ -4,9 +4,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>com.transglobe.framework</groupId>
-    <artifactId>transglobe-dependencies</artifactId>
+    <artifactId>transglobe-starters</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../dependencies/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
