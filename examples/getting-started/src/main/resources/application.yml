@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Getting Started
+
+springdoc:
+  swagger-ui:
+    path: /

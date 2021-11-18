@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: CRUD
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:demo;DB_CLOSE_ON_EXIT=FALSE;IGNORECASE=TRUE
+
+transglobe:
+  web:
+    error:
+      logging-strategy:
+        exact:
+          "info": E111
+        regex:
+          "trace": ^[Tt].+
+          "debug": ^[Dd].+
+          "info": ^[Ii].+
+          "warn": ^[Ww].+
+          "off": ^[Oo].+
+
+springdoc:
+  swagger-ui:
+    path: /
+
+logging:
+  level:
+    web: DEBUG
+    sql: DEBUG
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    jdbc:
+      resultsettable: INFO
+      sqltiming: INFO
+      sqlonly: FATAL
+      audit: FATAL
+      resultset: FATAL
+      connection: FATAL
+log4jdbc:
+  dump:
+    sql:
+      addsemicolon: true
+      maxlinelength: 0
+  trim:
+    sql:
+      extrablanklines: false
+server:
+  error:
+    include-stacktrace: always
+

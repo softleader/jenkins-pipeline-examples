@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.transglobe.framework.web.autoconfigure.TransGlobeOpenApiAutoConfiguration,\
+  com.transglobe.framework.web.autoconfigure.TransGlobeWebAutoConfiguration
