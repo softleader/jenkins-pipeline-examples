@@ -23,11 +23,15 @@
     </dependency>
 
     <dependency>
+      <groupId>com.transglobe.framework</groupId>
+      <artifactId>transglobe-test</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
-
   </dependencies>
 
   <build>

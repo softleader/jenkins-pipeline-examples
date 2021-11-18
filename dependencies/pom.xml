@@ -61,12 +61,6 @@
       </dependency>
 
       <dependency>
-        <groupId>com.transglobe.framework</groupId>
-        <artifactId>transglobe-libraries</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-webmvc-core</artifactId>
         <version>${springdoc-openapi.version}</version>
