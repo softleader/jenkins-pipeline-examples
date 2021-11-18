@@ -15,7 +15,14 @@
     <module>bom</module>
     <module>dependencies</module>
     <module>libraries</module>
-    <module>starters</module>
+
+    <!-- Starters -->
+    <module>transglobe-core</module>
+    <module>transglobe-web</module>
+    <module>transglobe-data-jpa</module>
+    <module>transglobe-test</module>
+
+    <!-- Examples -->
     <module>examples</module>
   </modules>
 
