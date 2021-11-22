@@ -34,8 +34,8 @@
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 
     <!-- dependency versions -->
-    <spring-boot.version>2.5.6</spring-boot.version>
-    <spring-cloud.version>2020.0.4</spring-cloud.version>
+    <spring-boot.version>2.6.0</spring-boot.version>
+    <spring-cloud.version>2021.0.0-RC1</spring-cloud.version>
     <transglobe-framework.version>${project.version}</transglobe-framework.version>
     <lombok.version>1.18.20</lombok.version>
     <mapstruct.version>1.4.2.Final</mapstruct.version>

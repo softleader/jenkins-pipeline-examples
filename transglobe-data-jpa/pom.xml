@@ -16,7 +16,6 @@
     <dependency>
       <groupId>com.transglobe.framework</groupId>
       <artifactId>transglobe-core</artifactId>
-      <scope>compile</scope>
     </dependency>
 
     <dependency>

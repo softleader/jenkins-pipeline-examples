@@ -14,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.transglobe.framework.examples.crud.complex.user.repository.UserRepository;
 import com.transglobe.framework.test.TransGlobeTest;
+import com.transglobe.framework.test.autoconfigure.redis.AutoConfigureRedisContainer;
 import java.time.LocalDate;
 import java.util.Objects;
 import lombok.SneakyThrows;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.web.servlet.MockMvc;
 
+@AutoConfigureRedisContainer
 @Timeout(1)
 @TransGlobeTest
 @AutoConfigureMockMvc
