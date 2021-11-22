@@ -1,0 +1,2 @@
+com.transglobe.framework.test.autoconfigure.redis.AutoConfigureRedisContainer=\
+com.transglobe.framework.test.autoconfigure.redis.RedisContainerAutoConfiguration
