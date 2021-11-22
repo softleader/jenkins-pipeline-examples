@@ -1,13 +1,19 @@
 package com.transglobe.framework.test.autoconfigure.redis;
 
+import static com.transglobe.framework.test.probes.AbstractExecProbes.execCommand;
+
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.shaded.org.apache.commons.lang.exception.ExceptionUtils;
 import org.testcontainers.utility.DockerImageName;
 
@@ -25,12 +31,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(RedisContainerProperties.class)
+@AutoConfigureBefore(RedisAutoConfiguration.class)
 public class RedisContainerAutoConfiguration {
 
   @Getter
   private static volatile GenericContainer redis;
+  private static final int REDIS_DEFAULT_PORT = 6379;
 
-  final RedisContainerProperties properties;
+  final Optional<RedisProperties> redisProperties;
+  final RedisContainerProperties redisContainerProperties;
 
   @Synchronized
   @PostConstruct
@@ -40,17 +49,17 @@ public class RedisContainerAutoConfiguration {
       return;
     }
     try {
-      redis = new GenericContainer(DockerImageName.parse(properties.getImageName()))
-          .withExposedPorts(properties.getPort())
+      var port = redisProperties.map(RedisProperties::getPort).orElse(REDIS_DEFAULT_PORT);
+      redis = new GenericContainer(DockerImageName.parse(redisContainerProperties.getImageName()))
+          .withExposedPorts(port)
           .withLogConsumer(new Slf4jLogConsumer(log))
-          .waitingFor(
-              Wait.forLogMessage(".*Ready to accept connections.*\\n", 1));
+          .waitingFor(execCommand("redis-cli", "-p", String.valueOf(port), "ping"));
       redis.start();
       log.info("Successfully started redis container on {}:{}", redis.getContainerIpAddress(),
           redis.getExposedPorts());
     } catch (Exception e) {
-      log.warn("Failed to start embedded redis server: {}", ExceptionUtils.getRootCauseMessage(e));
-      if (properties.isFastFail()) {
+      log.warn("Failed to start redis container: {}", ExceptionUtils.getRootCauseMessage(e));
+      if (redisContainerProperties.isFastFail()) {
         throw e;
       }
     }

@@ -27,7 +27,4 @@ public @interface AutoConfigureRedisContainer {
 
   @PropertyMapping("transglobe.test.redis.fast-fail")
   boolean fastFail() default true;
-
-  @PropertyMapping("transglobe.test.redis.port")
-  int port() default 6379;
 }

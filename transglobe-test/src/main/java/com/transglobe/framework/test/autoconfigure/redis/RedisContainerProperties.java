@@ -9,6 +9,5 @@ import lombok.Data;
 class RedisContainerProperties {
 
   String imageName;
-  Integer port;
   boolean fastFail;
 }
