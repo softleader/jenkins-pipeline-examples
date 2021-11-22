@@ -1,6 +1,6 @@
 package com.transglobe.framework.test.autoconfigure.redis;
 
-import static com.transglobe.framework.test.probes.AbstractExecProbes.execCommand;
+import static com.transglobe.framework.test.wait.strategy.ExecWaitStrategy.execCommand;
 
 import java.util.Optional;
 
