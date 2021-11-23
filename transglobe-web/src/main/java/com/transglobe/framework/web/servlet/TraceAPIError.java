@@ -1,4 +1,4 @@
-package com.transglobe.framework.web;
+package com.transglobe.framework.web.servlet;
 
 import static lombok.AccessLevel.PACKAGE;
 
@@ -20,7 +20,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 
-/** @author Matt Ho */
+/**
+ * @author Matt Ho
+ */
 @Schema(description = "錯誤結構 with traces")
 @Data
 @SuperBuilder

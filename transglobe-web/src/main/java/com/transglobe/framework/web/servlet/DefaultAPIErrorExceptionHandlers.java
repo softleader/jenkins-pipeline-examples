@@ -1,4 +1,4 @@
-package com.transglobe.framework.web;
+package com.transglobe.framework.web.servlet;
 
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
