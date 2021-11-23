@@ -12,16 +12,16 @@ format: ## Format the source code.
 	mvn process-sources -e
 
 clean: ## Remove files generated at build-time.
-	mvn -e clean
+	mvn clean -e
 
 compile: clean  ## Clean and compile the source code.
-	mvn -e compile
+	mvn compile -e
 
 test: clean ## Clean and test the compiled code.
-	mvn -e test
+	mvn test -e
 
 install: clean ## Install project to local repository w/o unit testing.
-	mvn -e install -DskipTests
+	mvn install -e -DskipTests -Prelease
 
 ##@ Delivery
 
@@ -35,5 +35,5 @@ endif
 	mvn versions:set -DnewVersion=$(VERSION)
 	mvn versions:commit
 
-deploy: ## Pack w/o unit testing, and deploy to remote repository.
-	mvn deploy -e -DskipTests
+delivery: ## Pack w/o unit testing, and deploy to remote repository.
+	mvn deploy -e -DskipTests -Prelease

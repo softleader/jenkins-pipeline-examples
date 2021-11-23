@@ -73,5 +73,11 @@ spec:
         sh "make test"
       }
     }
+
+    stage('發佈') {
+      steps {
+        sh "make delivery"
+      }
+    }
   }
 }
