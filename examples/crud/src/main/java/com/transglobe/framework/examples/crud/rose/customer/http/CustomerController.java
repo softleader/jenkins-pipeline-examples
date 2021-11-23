@@ -2,11 +2,10 @@ package com.transglobe.framework.examples.crud.rose.customer.http;
 
 import com.transglobe.framework.examples.crud.rose.customer.ChangePassword;
 import com.transglobe.framework.examples.crud.rose.customer.CreateCustomer;
+import com.transglobe.framework.examples.crud.rose.customer.CustomerDto;
 import com.transglobe.framework.examples.crud.rose.customer.CustomerService;
 import com.transglobe.framework.examples.crud.rose.customer.ReplaceCustomer;
-import com.transglobe.framework.examples.crud.rose.customer.repository.CustomerEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+
 @Tag(name = "Rose Style")
 @RestController
 @RequestMapping("/customers")
@@ -30,7 +31,7 @@ class CustomerController {
   final CustomerService service;
 
   @GetMapping
-  Page<CustomerEntity> listCustomers(CustomerCriteria criteria, Pageable pageable) {
+  Page<CustomerDto> listCustomers(CustomerCriteria criteria, Pageable pageable) {
     return service.getAll(criteria, pageable);
   }
 
