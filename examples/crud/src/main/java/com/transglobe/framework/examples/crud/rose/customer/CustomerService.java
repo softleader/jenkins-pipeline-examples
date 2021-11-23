@@ -23,8 +23,8 @@ public class CustomerService {
   final CustomerRepository repository;
   final CustomerMapper mapper;
 
-  public Page<CustomerEntity> getAll(CustomerCriteria criteria, Pageable pageable) {
-    return repository.findAll(pageable);
+  public Page<CustomerDto> getAll(CustomerCriteria criteria, Pageable pageable) {
+    return repository.findAll(pageable).map(mapper::fromEntity);
   }
 
   public long createCustomer(@Validated @NonNull CreateCustomer user) {
