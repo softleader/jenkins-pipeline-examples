@@ -1,4 +1,4 @@
-package com.transglobe.framework.web;
+package com.transglobe.framework.web.servlet;
 
 import static lombok.AccessLevel.PACKAGE;
 import static org.springframework.util.StringUtils.hasText;
@@ -27,17 +27,23 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor(access = PACKAGE)
 @NoArgsConstructor
-public class APIValidationError extends APIErrorDetail {
+class APIValidationError extends APIErrorDetail {
 
-  /** 驗證對象 */
+  /**
+   * 驗證對象
+   */
   @Schema(description = "驗證對象")
   String object;
 
-  /** 驗證欄位 */
+  /**
+   * 驗證欄位
+   */
   @Schema(description = "驗證欄位")
   String field;
 
-  /** 錯誤值 */
+  /**
+   * 錯誤值
+   */
   @Schema(description = "錯誤值")
   Object rejectedValue;
 

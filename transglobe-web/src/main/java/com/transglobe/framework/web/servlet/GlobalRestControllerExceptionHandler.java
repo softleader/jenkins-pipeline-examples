@@ -1,6 +1,6 @@
-package com.transglobe.framework.web;
+package com.transglobe.framework.web.servlet;
 
-import static com.transglobe.framework.web.DefaultAPIErrorExceptionHandlers.UNEXPECTED_ERROR_HANDLER;
+import static com.transglobe.framework.web.servlet.DefaultAPIErrorExceptionHandlers.UNEXPECTED_ERROR_HANDLER;
 import static java.util.Objects.requireNonNull;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 

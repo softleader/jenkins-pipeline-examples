@@ -1,4 +1,4 @@
-package com.transglobe.framework.web;
+package com.transglobe.framework.web.servlet;
 
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.springframework.lang.Nullable;
 
 import com.transglobe.framework.http.APIError;
-import com.transglobe.framework.web.autoconfigure.TransGlobeWebProperties.LoggingStrategy;
-import com.transglobe.framework.web.autoconfigure.TransGlobeWebProperties.LoggingStrategy.Slf4jLevel;
+import com.transglobe.framework.web.autoconfigure.TransGlobeWebProperties.WebErrorProperties.LoggingStrategy;
+import com.transglobe.framework.web.autoconfigure.TransGlobeWebProperties.WebErrorProperties.LoggingStrategy.Slf4jLevel;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

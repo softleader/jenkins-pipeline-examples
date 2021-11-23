@@ -1,6 +1,9 @@
 spring:
   application:
     name: CRUD
+  sleuth:
+    trace-id128: true
+    enabled: true
   h2:
     console:
       enabled: true
@@ -26,6 +29,7 @@ springdoc:
 
 logging:
   level:
+    root: INFO
     web: DEBUG
     sql: DEBUG
     com.zaxxer.hikari.HikariConfig: DEBUG
