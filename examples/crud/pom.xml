@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.transglobe.framework.examples</groupId>
     <artifactId>examples-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>examples-crud</artifactId>
