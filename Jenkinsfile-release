@@ -90,11 +90,11 @@ spec:
       }
     }
 
-    stage('Update Version') {
+    stage('Bump Version') {
       steps {
         sh "make new-version VERSION=${TAG}"
         container('git') {
-          sh '[ ! -z "$(git status -s)" ] && echo "Good to go!" || echo "版本號沒異動" && exit 1'
+          sh '[ -z "$(git status -s)" ] && echo "版本號沒異動喔! 是不是用到重複的版本號了!?" && exit 1 || echo "Good to go!"'
         }
       }
     }
