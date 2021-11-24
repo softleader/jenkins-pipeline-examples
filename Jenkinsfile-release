@@ -53,7 +53,7 @@ spec:
 
   stages {
 
-    stage('Detect Tag') {
+    stage('Setup') {
       steps {
         script {
           if (!"${ref}".startsWith("refs/tags/")) {
@@ -64,12 +64,12 @@ spec:
           if (!isSemVer) {
             error "Tag must matches semantic versioning 2 (https://semver.org/) but got: ${TAG}";
           }
+          env.PR_BRANCH = jenkins-bot/bump-version-to-${TAG}
         }
-      }
-    }
-
-    stage ('Configure Git') {
-      steps {
+        sh 'printenv'
+        sh 'java -version'
+        sh 'mvn --version'
+        echo "${params}"
         container('git') {
           sh """
           git remote set-url origin https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/softleader/jenkins-pipeline-examples.git
@@ -81,12 +81,12 @@ spec:
       }
     }
 
-    stage('Confirm Env') {
+    stage('Compile and Style Check') {
       steps {
-        sh 'printenv'
-        sh 'java -version'
-        sh 'mvn --version'
-        echo "${params}"
+        sh "make compile"
+        container('git') {
+          sh '[ ! -z "$(git status -s)" ] && echo "排版檢查不通過!" && exit 1 || echo "Good to go!"'
+        }
       }
     }
 
@@ -95,15 +95,6 @@ spec:
         sh "make new-version VERSION=${TAG}"
         container('git') {
           sh '[ -z "$(git status -s)" ] && echo "版本號沒異動喔! 是不是用到重複的版本號了!?" && exit 1 || echo "Good to go!"'
-        }
-      }
-    }
-
-    stage('Compile and Style Check') {
-      steps {
-        sh "make compile"
-        container('git') {
-          sh '[ ! -z "$(git status -s)" ] && echo "排版檢查不通過!" && exit 1 || echo "Good to go!"'
         }
       }
     }
@@ -120,14 +111,15 @@ spec:
       }
     }
 
-    stage ('Create PR') {
+    stage ('Merge Main') {
       steps {
         container('git') {
           sh """
-          git checkout -b jenkins-bot/bump-version-to-${TAG}
-          git commit -m "Bump version to ${TAG}" README.md
-          git push --set-upstream origin jenkins-bot/bump-version-to-${TAG}
+          git checkout -b ${PR_BRANCH}
+          git commit -m "Bump version to ${TAG}" **/pom.xml
+          git push --set-upstream origin ${PR_BRANCH}
           gh pr create --title "Bump version to ${TAG}" --body "Bump version to ${TAG}"
+          gh pr merge ${PR_BRANCH} --admin --merge --delete-branch
           """
         }
       }
