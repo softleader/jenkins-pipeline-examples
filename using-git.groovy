@@ -51,14 +51,15 @@ spec:
         echo "> Hello from $BUILD_TAG" >> README.md
         git commit -m "add hello message" README.md
         git push --set-upstream origin $BUILD_TAG
+        gh pr create --title "Bump version to ${TAG}" --body "Bump version to ${TAG}"
         """
       }
     } 
 
-    stage('Delete remote branch') {
-      steps {
-        sh "git push origin :$BUILD_TAG"
-      }
-    } 
+    // stage('Delete remote branch') {
+    //   steps {
+    //     sh "git push origin :$BUILD_TAG"
+    //   }
+    // } 
   }
 }
