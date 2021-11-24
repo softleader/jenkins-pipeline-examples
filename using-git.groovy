@@ -26,6 +26,8 @@ spec:
     // 在 Jenkins 中 System Configuration > Manage Credential
     // ref: https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets
     CREDENTIAL = credentials("a84db61d-b4a4-4e05-a368-c1b283860090")
+    // 這是 github cli 需要的登入變數
+    GH_ENTERPRISE_TOKEN = $CREDENTIAL_PSW
   }
 
   stages {
