@@ -35,5 +35,5 @@ endif
 	mvn versions:set -DnewVersion=$(VERSION)
 	mvn versions:commit
 
-delivery: ## Pack w/o unit testing, and deploy to remote repository.
+release: ## Pack w/o unit testing, and deploy to remote repository.
 	mvn deploy -e -DskipTests -Prelease

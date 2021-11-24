@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
 
+currentBuild.description = "${ref}"
+
 pipeline {
   agent {
     kubernetes {
@@ -46,6 +48,17 @@ spec:
 
   stages {
 
+    stage('取得版本號') {
+      steps {
+        script {
+          if (!"${ref}".startsWith("refs/tags/")) {
+            error "ref must start with 'refs/tags/' but get: ${ref}";
+          }
+          env.TAG = "${ref}".replace("refs/tags/", "")
+        }
+      }
+    }
+
     stage('確認環境變數') {
       steps {
         sh 'printenv'
@@ -55,16 +68,20 @@ spec:
       }
     }
 
-    stage('程式編譯') {
+    stage('更新版本號') {
       steps {
-        sh "make compile"
+        sh "make new-version VERSION=${TAG}"
+        container('git') {
+          sh '[ ! -z "$(git status -s)" ] && echo "Good to go!" || echo "版本號沒異動" && exit 1'
+        }
       }
     }
 
-    stage('檢查程式碼排版') {
+    stage('程式編譯及排版檢查') {
       steps {
+        sh "make compile"
         container('git') {
-          sh '[ ! -z "$(git status -s)" ] && exit 1 || echo "Good to go!"'
+          sh '[ ! -z "$(git status -s)" ] && echo "排版檢查不過!" && exit 1 || echo "Good to go!"'
         }
       }
     }
@@ -77,7 +94,7 @@ spec:
 
     stage('發佈') {
       steps {
-        sh "make delivery"
+        sh "make release"
       }
     }
   }
