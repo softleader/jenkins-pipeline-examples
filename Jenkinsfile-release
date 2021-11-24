@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 
 currentBuild.description = "${ref}"
+// https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+def semverPattern = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
 
 pipeline {
   agent {
@@ -27,7 +29,7 @@ spec:
     - name: m2
       mountPath: /root/.m2
   - name: git
-    image: alpine/git:v2.32.0
+    image: harbor.softleader.com.tw/library/git:2
     command: ['cat']
     tty: true
     resources:
@@ -43,23 +45,43 @@ spec:
   }
 
   environment {
+    // 在 Jenkins 中 System Configuration > Manage Credential
+    // ref: https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets
+    CREDENTIAL = credentials("a84db61d-b4a4-4e05-a368-c1b283860090")
     MAVEN_OPTS="-Xmx2048m -XX:MaxMetaspaceSize=128m"
   }
 
   stages {
 
-    stage('取得版本號') {
+    stage('Detect Tag') {
       steps {
         script {
           if (!"${ref}".startsWith("refs/tags/")) {
-            error "ref must start with 'refs/tags/' but get: ${ref}";
+            error "Ref must start with 'refs/tags/' but got: ${ref}";
           }
           env.TAG = "${ref}".replace("refs/tags/", "")
+          def isSemVer = ("${TAG}" ==~ semverPattern)
+          if (!isSemVer) {
+            error "Tag must matches semantic versioning 2 (https://semver.org/) but got: ${TAG}";
+          }
         }
       }
     }
 
-    stage('確認環境變數') {
+    stage ('Configure Git') {
+      steps {
+        container('git') {
+          sh """
+          git remote set-url origin https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/softleader/jenkins-pipeline-examples.git
+          git config --global user.email "jenkins-bot@softleader.com.tw"
+          git config --global user.name "jenkins-bot"
+          echo $CREDENTIAL_PSW | gh auth login --with-token
+          """
+        }
+      }
+    }
+
+    stage('Confirm Env') {
       steps {
         sh 'printenv'
         sh 'java -version'
@@ -68,7 +90,7 @@ spec:
       }
     }
 
-    stage('更新版本號') {
+    stage('Update Version') {
       steps {
         sh "make new-version VERSION=${TAG}"
         container('git') {
@@ -77,24 +99,37 @@ spec:
       }
     }
 
-    stage('程式編譯及排版檢查') {
+    stage('Compile and Style Check') {
       steps {
         sh "make compile"
         container('git') {
-          sh '[ ! -z "$(git status -s)" ] && echo "排版檢查不過!" && exit 1 || echo "Good to go!"'
+          sh '[ ! -z "$(git status -s)" ] && echo "排版檢查不通過!" && exit 1 || echo "Good to go!"'
         }
       }
     }
 
-    stage('單元測試') {
+    stage('Unit Testing') {
       steps {
         sh "make test"
       }
     }
 
-    stage('發佈') {
+    stage('Release') {
       steps {
         sh "make release"
+      }
+    }
+
+    stage ('Create PR') {
+      steps {
+        container('git') {
+          sh """
+          git checkout -b jenkins-bot/bump-version-to-${TAG}
+          git commit -m "Bump version to ${TAG}" README.md
+          git push --set-upstream origin jenkins-bot/bump-version-to-${TAG}
+          gh pr create --title "Bump version to ${TAG}" --body "Bump version to ${TAG}"
+          """
+        }
       }
     }
   }
