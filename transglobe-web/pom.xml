@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.transglobe.framework</groupId>
     <artifactId>transglobe-dependencies</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <relativePath>../dependencies/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
