@@ -14,6 +14,7 @@ spec:
   containers:
   - name: maven
     image: harbor.softleader.com.tw/library/maven:3-azulzulu-11
+    imagePullPolicy: Always
     command: ['cat']
     tty: true
     resources:
