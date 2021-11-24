@@ -46,7 +46,7 @@ spec:
 
   stages {
 
-    stage('確認環境變數') {
+    stage('Confirm Env') {
       steps {
         sh 'printenv'
         sh 'java -version'
@@ -55,7 +55,7 @@ spec:
       }
     }
 
-    stage('程式編譯及排版檢查') {
+    stage('Compile and Style Check') {
       steps {
         sh "make compile"
         container('git') {
@@ -64,7 +64,7 @@ spec:
       }
     }
 
-    stage('單元測試') {
+    stage('Unit Testing') {
       steps {
         sh "make test"
       }
