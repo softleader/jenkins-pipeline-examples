@@ -55,14 +55,9 @@ spec:
       }
     }
 
-    stage('程式編譯') {
+    stage('程式編譯及排版檢查') {
       steps {
         sh "make compile"
-      }
-    }
-
-    stage('檢查程式碼排版') {
-      steps {
         container('git') {
           sh '[ ! -z "$(git status -s)" ] && exit 1 || echo "Good to go!"'
         }
