@@ -34,11 +34,10 @@ make help
 4. 勾選 `This is pre-release`
 5. 點選 `[Publish release]`
 
-一旦有任何 pre-release 發佈, 在 [Action](https://github.com/softleader/transglobe-framework/actions) 就會自動 Workflow, 
-該 Workflow 會通知公司 [Jenkins](https://softleader.com.tw:48080/view/transglobe/job/transglobe-framework-release/) 執行 [`Jenkinsfile-release`](./Jenkinsfile-release) 中所定義的 pipeline
+一旦有任何 pre-release 發佈, [GitHub Action](https://github.com/softleader/transglobe-framework/actions) 就會自動啟動 Workflow 去會通知公司 [Jenkins](https://softleader.com.tw:48080/view/transglobe/job/transglobe-framework-release/) 執行 [`Jenkinsfile-release`](./Jenkinsfile-release) 中所定義的 pipeline.
 
-> 請注意, Workflow timeout 設定為 10 分鐘, 畢竟理論上一個健康的 Release 流程也不會超過 10 分鐘
+> 請注意, Workflow timeout 設定為 10 分鐘, 畢竟理論上一個健康的 Release pipeline 也不應該超過 10 分鐘!
 
-Pipeline 流程若順利完成, 會發佈 PR 並自動 Merge 回 Main, 當你發現 Main 已經更新了, 便可以到  [Release](https://github.com/softleader/transglobe-framework/releases) 中將 `pre-release` ㄉ勾取消使其成為正式的 Release 版本
+Pipeline 流程若順利完成, 會發佈 PR 並自動 Merge 回 Main, 當你發現 Main 已經更新了, 便可以選擇一個適當的發佈時間到 [Release](https://github.com/softleader/transglobe-framework/releases) 頁面中, 將之前 `pre-release` 的勾取消使其成為正式的 Release 版本.
 
 </details>
