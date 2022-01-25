@@ -23,6 +23,9 @@ spec:
     - name: m2
       mountPath: /root/.m2
   volumes:
+  - name: workspace-volume
+    persistentVolumeClaim:
+      claimName: workspace-claim
   - name: m2
     persistentVolumeClaim:
       claimName: m2-claim
