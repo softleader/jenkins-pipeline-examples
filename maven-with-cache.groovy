@@ -6,6 +6,7 @@ pipeline {
   agent {
     kubernetes {
       cloud 'SLKE'
+      workspaceVolume persistentVolumeClaimWorkspaceVolume(claimName: 'workspace-claim', readOnly: false)
       defaultContainer 'maven'
       yaml """
 kind: Pod
