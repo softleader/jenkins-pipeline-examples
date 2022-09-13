@@ -37,7 +37,7 @@ spec:
 		HARBOR_ROBOT_TOKEN=${harbor_robot_token}
 		USER=${sftp_user}
 		PASSWORD=${sftp_password}
-		REMOTE_DIR=${remove_dir}
+		REMOTE_DIR=${sftp_remote_dir}
 		TAR_NAME_PREFIX=${tar_name_prefix}
 		IMAGES=${images}
   }
