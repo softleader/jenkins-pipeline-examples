@@ -15,6 +15,7 @@ spec:
   containers:
   - name: sftp-image
     image: harbor.softleader.com.tw/library/sftp-image
+		imagePullPolicy: Always
     command: ['cat']
     tty: true
     resources:
