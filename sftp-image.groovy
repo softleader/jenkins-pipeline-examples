@@ -45,6 +45,13 @@ spec:
   }
 
   stages {
+
+    stage('確認環境變數') {
+      steps {
+        sh 'printenv'
+      }
+    }
+
     stage ('Harbor Login') {
       steps {
         sh "docker login harbor.softleader.com.tw -u '${HARBOR_ROBOT_NAME}' -p '${HARBOR_ROBOT_TOKEN}'"
