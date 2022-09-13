@@ -34,14 +34,11 @@ spec:
   }
 
   environment {
-		HARBOR_ROBOT_NAME="${harbor_robot_name}"
-		HARBOR_ROBOT_TOKEN="${harbor_robot_token}"
 		USER="${sftp_user}"
 		PASSWORD="${sftp_password}"
 		REMOTE_DIR="${sftp_remote_dir}"
 		TAR_NAME="${upload_name}"
 		TAR_NAME_PREFIX="${upload_name_prefix}"
-		IMAGES="${images}"
   }
 
   stages {
@@ -54,13 +51,13 @@ spec:
 
     stage ('Harbor Login') {
       steps {
-        sh "docker login harbor.softleader.com.tw -u '${HARBOR_ROBOT_NAME}' -p '${HARBOR_ROBOT_TOKEN}'"
+        sh "docker login harbor.softleader.com.tw -u '${harbor_robot_name}' -p '${harbor_robot_token}'"
       }
     }
 
     stage ('SFTP Image') {
       steps {
-        sh "/sftp-image.sh ${IMAGES}"
+        sh "/sftp-image.sh ${images}"
       }
     }
   }
