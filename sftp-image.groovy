@@ -46,7 +46,7 @@ spec:
   stages {
     stage ('Harbor Login') {
       steps {
-        sh "docker login -u '${HARBOR_ROBOT_NAME}' -p '${HARBOR_ROBOT_TOKEN}'"
+        sh "docker login harbor.softleader.com.tw -u '${HARBOR_ROBOT_NAME}' -p '${HARBOR_ROBOT_TOKEN}'"
       }
     }
 
