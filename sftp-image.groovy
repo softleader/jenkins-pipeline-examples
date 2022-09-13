@@ -33,13 +33,13 @@ spec:
   }
 
   environment {
-		HARBOR_ROBOT_NAME=${harbor_robot_name}
-		HARBOR_ROBOT_TOKEN=${harbor_robot_token}
-		USER=${sftp_user}
-		PASSWORD=${sftp_password}
-		REMOTE_DIR=${sftp_remote_dir}
-		TAR_NAME_PREFIX=${tar_name_prefix}
-		IMAGES=${images}
+		HARBOR_ROBOT_NAME="${harbor_robot_name}"
+		HARBOR_ROBOT_TOKEN="${harbor_robot_token}"
+		USER="${sftp_user}"
+		PASSWORD="${sftp_password}"
+		REMOTE_DIR="${sftp_remote_dir}"
+		TAR_NAME_PREFIX="${tar_name_prefix}"
+		IMAGES="${images}"
   }
 
   stages {
