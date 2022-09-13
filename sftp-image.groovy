@@ -39,8 +39,8 @@ spec:
 		USER="${sftp_user}"
 		PASSWORD="${sftp_password}"
 		REMOTE_DIR="${sftp_remote_dir}"
-		TAR_NAME="${tar_name}"
-		TAR_NAME_PREFIX="${tar_name_prefix}"
+		TAR_NAME="${upload_name}"
+		TAR_NAME_PREFIX="${upload_name_prefix}"
 		IMAGES="${images}"
   }
 
