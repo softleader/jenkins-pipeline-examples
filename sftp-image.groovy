@@ -20,8 +20,8 @@ spec:
     tty: true
     resources:
       limits:
-        memory: "200Mi"
-        cpu: "500m"
+        memory: "500Mi"
+        cpu: "1"
     volumeMounts:
     - name: dockersock
       mountPath: /var/run/docker.sock
