@@ -9,6 +9,9 @@ pipeline {
       yaml """
 kind: Pod
 spec:
+  # All containers should have the same UID
+  securityContext:
+    runAsUser: 0
   containers:
   - name: docker
     image: docker:dind

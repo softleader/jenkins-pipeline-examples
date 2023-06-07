@@ -11,6 +11,9 @@ pipeline {
       yaml """
 kind: Pod
 spec:
+  # All containers should have the same UID
+  securityContext:
+    runAsUser: 0
   containers:
   - name: maven
     image: harbor.softleader.com.tw/library/maven:3-eclipse-temurin-11

@@ -10,6 +10,9 @@ pipeline {
       yaml """
 kind: Pod
 spec:
+  # All containers should have the same UID
+  securityContext:
+    runAsUser: 0
   containers:
   - name: trivy
     image: aquasec/trivy:0.19.1

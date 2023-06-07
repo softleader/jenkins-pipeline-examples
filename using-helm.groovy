@@ -9,6 +9,9 @@ pipeline {
       yaml """
 kind: Pod
 spec:
+  # All containers should have the same UID
+  securityContext:
+    runAsUser: 0
   # service account 需要先在 k8s cluster 中建立好
   # ref: https://github.com/softleader/slke/blob/main/manifests/namespaces/jenkins.yaml#L39
   serviceAccountName: jenkins
