@@ -32,14 +32,22 @@ spec:
   }
 
   stages {
-     stage ('Configure git') {
+    stage('Configure git') {
       steps {
-        sh """
-        git remote set-url origin https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/softleader/jenkins-pipeline-examples.git
-        git config --global user.email "jenkins-bot@softleader.com.tw"
-        git config --global user.name "jenkins-bot"
-        echo $CREDENTIAL_PSW | gh auth login --with-token
-        """
+        container('git') {
+          script {
+            env.GIT_PATH = sh(
+              script: 'echo $GIT_URL | awk -F"github.com/" "{print \\\$2}"',
+              returnStdout: true
+            ).trim()
+            sh """
+            git remote set-url origin https://$CREDENTIAL_USR:"$CREDENTIAL_PSW"@github.com/$GIT_PATH".git"
+            git config --global user.email "jenkins-bot@softleader.com.tw"
+            git config --global user.name "jenkins[bot]"
+            echo $CREDENTIAL_PSW | gh auth login --with-token
+            """
+          }
+        }
       }
     }
     
