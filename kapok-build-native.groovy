@@ -18,8 +18,8 @@ spec:
     tty: true
     resources:
       limits:
-        memory: "2Gi"
-        cpu: "2"
+        memory: "1Gi"
+        cpu: "1"
     volumeMounts:
     - name: m2
       mountPath: /root/.m2
