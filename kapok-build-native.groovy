@@ -64,7 +64,7 @@ spec:
      steps {
        container('curl') {
         sh """
-        curl -SL http://start-kapok.192.168.1.240.nip.io/starter.zip?dependencies=native -o ${DATA}/demo.zip
+        curl -SL http://start-kapok.192.168.1.240.nip.io/starter.zip?jvmVersion=21&dependencies=native -o ${DATA}/demo.zip
         unzip ${DATA}/demo.zip -d ${DATA}
         rm -f ${DATA}/demo.zip
         """
