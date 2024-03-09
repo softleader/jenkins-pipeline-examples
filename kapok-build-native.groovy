@@ -12,20 +12,11 @@ spec:
   securityContext:
     runAsUser: 0
   containers:
-  - name: curl
-    image: curlimages/curl
-    command: ['cat']
-    tty: true
-    volumeMounts:
-    - name: shared-data
-      mountPath: /data
   - name: maven
     image: harbor.softleader.com.tw/library/maven:3-graalvm-community-21
     command: ['cat']
     tty: true
     volumeMounts:
-    - name: shared-data
-      mountPath: /data
     - name: m2
       mountPath: /root/.m2
     - name: dockersock
@@ -42,8 +33,6 @@ spec:
     - name: dockersock
       mountPath: /var/run/docker.sock
   volumes:
-  - name: shared-data
-    emptyDir: {}
   - name: m2
     persistentVolumeClaim:
       claimName: m2-claim
@@ -55,17 +44,17 @@ spec:
   }
 
   environment {
-    DATA="/data"
+    DATA="/app"
     IMAGE_NAME="jenkins-pipeline-examples/kapok-build-native:1.0.0"
   }
 
   stages {
     stage ('Download source code') {
      steps {
-       container('curl') {
+       container('maven') {
         sh """
-        curl -SL http://start-kapok.192.168.1.240.nip.io/starter.zip?jvmVersion=21&dependencies=native -o ${DATA}/demo.zip
-        unzip ${DATA}/demo.zip -d ${DATA}
+        curl -SL 'http://start-kapok.192.168.1.240.nip.io/starter.zip?jvmVersion=21&dependencies=native' -o ${DATA}/demo.zip
+        unzip -o ${DATA}/demo.zip -d ${DATA}
         rm -f ${DATA}/demo.zip
         """
        }
