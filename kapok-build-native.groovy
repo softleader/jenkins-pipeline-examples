@@ -16,6 +16,10 @@ spec:
     image: harbor.softleader.com.tw/library/maven:3-graalvm-community-21
     command: ['cat']
     tty: true
+    resources:
+      limits:
+        memory: "2Gi"
+        cpu: "2"
     volumeMounts:
     - name: m2
       mountPath: /root/.m2
