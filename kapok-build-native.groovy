@@ -49,7 +49,9 @@ spec:
 
   environment {
     DATA="/app"
-    IMAGE_NAME="jenkins-pipeline-examples/kapok-build-native:1.0.0"
+    IMAGE_REGISTRY="jenkins-pipeline-examples"
+    IMAGE_PROJECT="kapok-build-native"
+    IMAGE_NAME="${IMAGE_REGISTRY}/${IMAGE_PROJECT}/demo:1.0.0"
   }
 
   stages {
@@ -69,7 +71,7 @@ spec:
      steps {
        container('maven') {
         sh """
-        mvn -f ${DATA}/pom.xml spring-boot:build-image -Pnative -Dspring-boot.build-image.imageName=${IMAGE_NAME}
+        mvn -f ${DATA}/pom.xml spring-boot:build-image -Pnative -Dcontainer-image-repository=${IMAGE_REGISTRY} -Dcontainer-image-project=${IMAGE_PROJECT}
         """
        }
        container('docker') {
