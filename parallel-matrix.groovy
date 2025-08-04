@@ -46,10 +46,7 @@ spec:
             matrixJobs["JAVA = ${version}"] = {
               stage("Matrix - JAVA = ${version}") {
                 container("maven-java${version}") {
-                  sh """
-                    java --version
-                    sleep 5
-                  """
+                  sh "java --version"
                 }
               }
             }
