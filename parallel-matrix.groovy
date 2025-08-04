@@ -22,16 +22,16 @@ spec:
     tty: true
     resources:
       limits:
-        memory: "10Mi"
-        cpu: "10m"
+        memory: "100Mi"
+        cpu: "100m"
   - name: maven-java21
     image: harbor.softleader.com.tw/library/maven:3-eclipse-temurin-21
     command: ['cat']
     tty: true
     resources:
       limits:
-        memory: "10Mi"
-        cpu: "10m"
+        memory: "100Mi"
+        cpu: "100m"
 """
     }
   }
