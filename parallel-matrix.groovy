@@ -47,9 +47,7 @@ spec:
               stage("Matrix - JAVA = ${version}") {
                 container("maven-java${version}") {
                   sh """
-                    echo "Running java --version for Java ${version}"
                     java --version
-                    echo "Sleeping for 5 seconds..."
                     sleep 5
                   """
                 }
